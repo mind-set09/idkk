@@ -22,8 +22,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
-        pip install git+https://github.com/blurpy/lightbulb.git@1.2.0b3
-        sudo apt install build-essential python3-dev
+        pip install discord.py discord-components
 
     - name: Run Bot
       env:
