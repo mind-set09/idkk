@@ -22,8 +22,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
-        pip install discord-py-interactions
-        pip install discord.py
+        pip install -U disnake
         
     - name: Run Bot
       env:
