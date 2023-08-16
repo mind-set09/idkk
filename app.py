@@ -54,15 +54,31 @@ async def botinfo(inter):
 
     await inter.response.send_message(embed=embed, view=view)
 
-# Simulated bot information for demonstration
-bot_info = {
-    "ping": 42,
-    "cpu_usage": psutil.cpu_percent(),
-    "memory_usage": psutil.virtual_memory().percent,
-    "os_info": f"{platform.system()} {platform.release()}",
-    "python_version": platform.python_version(),
-    "invite_url": "https://discord.com/oauth2/authorize?client_id=YOUR_BOT_CLIENT_ID&permissions=0&scope=bot",
-    # Add more bot info keys here
+@app.route('/server_info')
+def server_info():
+    server_count = len(bot.guilds)
+    total_users = sum(guild.member_count for guild in bot.guilds)
+
+    return jsonify({
+        'serverCount': server_count,
+        'totalUsers': total_users
+    })
+
+@app.route('/bot_stats')
+def bot_stats():
+    ping = round(bot.latency * 1000, 2)
+    cpu_usage = psutil.cpu_percent()
+    memory_info = psutil.virtual_memory().percent
+    os_info = f"{platform.system()} {platform.release()}"
+    python_version = platform.python_version()
+
+    return jsonify({
+        'ping': ping,
+        'cpuUsage': cpu_usage,
+        'memoryUsage': memory_info,
+        'osInfo': os_info,
+        'pythonVersion': python_version
+    })
 }
 
 @app.route("/")
