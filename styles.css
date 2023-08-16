@@ -7,14 +7,15 @@
 
 /* Set dark background and text colors */
 body {
-  background-color: #222;
-  color: #fff;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
   font-family: Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* Header styles */
 header {
-  background-color: #333;
+  background-color: #262626;
   padding: 20px;
   display: flex;
   justify-content: space-between;
@@ -27,9 +28,14 @@ header {
 }
 
 nav a {
-  color: #fff;
+  color: #e0e0e0;
   margin: 0 15px;
   text-decoration: none;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #ffffff;
 }
 
 /* Hero section styles */
@@ -48,6 +54,7 @@ nav a {
   border-radius: 5px;
   text-decoration: none;
   transition: background-color 0.3s;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -56,7 +63,7 @@ nav a {
 
 /* Features section styles */
 #features {
-  background-color: #333;
+  background-color: #1a1a1a;
   padding: 50px 0;
   text-align: center;
 }
@@ -68,15 +75,16 @@ nav a {
 .feature h3 {
   color: rgb(100, 255, 100);
   margin-top: 15px;
+  font-size: 24px;
 }
 
 .feature p {
-  color: #ccc;
+  color: #b0b0b0;
 }
 
 /* Commands section styles */
 #commands {
-  background-color: #222;
+  background-color: #111;
   padding: 50px 0;
   text-align: center;
 }
@@ -98,29 +106,29 @@ nav a {
 
 /* Invite section styles */
 #invite {
-  background-color: #111;
+  background-color: #262626;
   padding: 100px 0;
   text-align: center;
 }
 
 /* Dashboard section styles */
 #dashboard {
-  background-color: #222;
+  background-color: #1a1a1a;
   padding: 100px 0;
   text-align: center;
 }
 
 /* About section styles */
 #about {
-  background-color: #333;
+  background-color: #111;
   padding: 50px 0;
   text-align: center;
 }
 
 /* Footer styles */
 footer {
-  background-color: #333;
-  color: #ccc;
+  background-color: #262626;
+  color: #b0b0b0;
   padding: 20px 0;
   text-align: center;
 }
@@ -128,6 +136,7 @@ footer {
 footer a {
   color: rgb(100, 255, 100);
   text-decoration: none;
+  transition: color 0.3s;
 }
 
 footer a:hover {
