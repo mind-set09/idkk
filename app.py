@@ -4,9 +4,11 @@ from datetime import datetime
 import disnake
 from disnake.ext import commands, tasks
 import sqlite3
-
+import psutil
 
 bot = commands.Bot() 
+
+bot = commands.Bot(intents=Intents.all())
 
 @bot.slash_command()
 async def system(ctx):
@@ -30,7 +32,7 @@ async def system(ctx):
   if gpu := psutil.gpu():
     embed.add_field(name="GPU", value=gpu.name)
       
-  view = disnake.ui.View()
+view = disnake.ui.View()
 
   support_btn = disnake.ui.Button(
     label="Support Server", 
@@ -94,11 +96,35 @@ async def on_ready():
   db.create_tables()
   print("Bot ready")
 
+
 @bot.slash_command()
-async def create(ctx, description: str, due_date: Option(datetime, "Leave empty for none")):
+async def ticket(ctx):
+  """Create, view, close, or delete tickets"""
+  pass
+
+@ticket.sub_command(name="create")  
+async def create(
+  ctx, 
+  description: str, 
+  due_date: Option(datetime, "Leave empty for none") = None
+):
+
   ticket = Ticket(len(db.get_tickets()) + 1, description, "open", due_date)
+  
   await db.create_ticket(ticket)
-  await ctx.respond(f"Ticket {ticket.id} created")
+  
+  ticket_channel = await ctx.guild.create_text_channel(f"ticket-{ticket.id}")
+
+  embed = discord.Embed(title="New Ticket", description=description)
+  if due_date:
+    embed.add_field(name="Due Date", value=due_date.strftime("%m/%d/%Y"))
+
+  await ticket_channel.send(embed=embed)
+
+  await ticket_channel.set_permissions(ctx.author, read_messages=True, send_messages=True)
+  await ticket_channel.set_permissions(ctx.guild.default_role, read_messages=False)
+
+  await ctx.respond(f"Ticket {ticket.id} created!", ephemeral=True)
 
 @bot.slash_command() 
 async def list(ctx):
