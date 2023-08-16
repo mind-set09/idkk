@@ -1,4 +1,25 @@
-disnake
-psutil
-flask
-requests
+disnake==2.6.0
+Python-dotenv==0.21.0
+sqlalchemy==1.4.46
+psycopg2-binary==2.9.5
+
+discord.py==2.1.0
+asyncio==3.4.3
+
+# Bot framework
+disnake.ext.commands==2.5.0
+
+# Database 
+sqlalchemy==1.4.46
+psycopg2-binary==2.9.5
+
+# Environment vars
+python-dotenv==0.21.0
+
+# Styling
+coloredlogs==15.0.1
+
+# Linting
+pylint==2.15.9
+autoflake==2.0.0
+autopep8==2.0.1
