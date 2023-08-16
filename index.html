@@ -1,70 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bot Information</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .info-container {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 24px;
-            text-align: center;
-            width: 360px;
-        }
-
-        h1 {
-            color: #3498db;
-            margin-top: 0;
-        }
-
-        .info-box {
-            background-color: #f2f2f2;
-            border-radius: 4px;
-            padding: 12px;
-            margin: 12px 0;
-        }
-
-        .button-container {
-            margin-top: 24px;
-        }
-
-        .invite-button {
-            background-color: #3498db;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 16px;
-            padding: 8px 16px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bot Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="info-container">
-        <h1>Bot Information</h1>
-        <div class="info-box">
-            <p>Ping: {{ bot_info.ping }} ms</p>
-            <p>CPU Usage: {{ bot_info.cpu_usage }}%</p>
-            <p>Memory Usage: {{ bot_info.memory_usage }}%</p>
-            <p>Operating System: {{ bot_info.os_info }}</p>
-            <p>Python Version: {{ bot_info.python_version }}</p>
-            <!-- Add more bot info fields here -->
-        </div>
-        <div class="button-container">
-            <a class="invite-button" href="{{ bot_info.invite_url }}" target="_blank">Invite Bot 🤖</a>
-        </div>
-    </div>
+  <header>
+    <h1>Bot Dashboard</h1>
+  </header>
+  
+  <main>
+    <section class="server-list">
+      <!-- Server List will go here -->
+    </section>
+    
+    <section class="command-usage">
+      <!-- Command Usage Statistics will go here -->
+    </section>
+    
+    <section class="server-statistics">
+      <!-- Server Statistics will go here -->
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2023 Your Bot Name. All rights reserved.</p>
+  </footer>
+
+  <!-- Add a terminal to display errors -->
+  <div class="terminal">
+    <pre id="terminal-output"></pre>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
