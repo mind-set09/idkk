@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Viken Tech Bot Dashboard</title>
+  <meta name="description" content="Dashboard for managing Viken Tech Bot">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="/">
+        <img src="botlogo.png" alt="Viken Tech Bot Official">
+      </a>
+    </div>
+    <nav>
+      <a href="#dashboard">Home</a>
+      <a href="#commands">Commands</a>
+      <a href="#analytics">Analytics</a>
+    </nav>
+  </header>
+
+  <section id="dashboard">
+    <h1>Dashboard for Viken Tech Bot</h1>
+    <p>Welcome to the bot's dashboard! Manage your server settings and more.</p>
+  </section>
+
+  <section id="commands">
+    <h2>Commands</h2>
+    <p>Explore and manage the available bot commands here.</p>
+    <div class="command-list">
+      <div class="command">
+        <h3>!ticket [issue]</h3>
+        <p>Open a support ticket for the given issue.</p>
+      </div>
+      <div class="command">
+        <h3>!adminupload [file]</h3>
+        <p>Upload a file to the admin channel.</p>
+      </div>
+      <!-- Add more commands here -->
+    </div>
+  </section>
+
+  <section id="analytics">
+    <h2>Analytics</h2>
+    <p>Track user interactions, popular commands, and server insights.</p>
+    <div class="live-info">
+      <h3>Live Information</h3>
+      <p>CPU Usage: <span id="cpu-usage">...</span></p>
+      <p>Memory Usage: <span id="memory-usage">...</span></p>
+      <p>Network Activity: <span id="network-activity">...</span></p>
+      <p>Python Version: <span id="python-version">...</span></p>
+      <p>Platform: <span id="platform">...</span></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; Viken Tech Bot Official 2023</p>
+    <p>Created by John Doe</p>
+  </footer>
+
+  <script src="dashboard.js"></script>
+</body>
+
+</html>
