@@ -61,23 +61,21 @@ async def botinfo(inter):
     await inter.response.send_message(embed=embed, view=view)
 
 
-# Flask route
+app = Flask(__name__)
+
+# Simulated bot information for demonstration
+bot_info = {
+    "ping": 42,
+    "cpu_usage": psutil.cpu_percent(),
+    "memory_usage": psutil.virtual_memory().percent,
+    "os_info": f"{platform.system()} {platform.release()}",
+    "python_version": platform.python_version(),
+    "invite_url": "https://discord.com/oauth2/authorize?client_id=YOUR_BOT_CLIENT_ID&permissions=0&scope=bot"
+}
+
 @app.route("/")
 def index():
-    try:
-        response = requests.get("http://localhost:5000/botinfo")
-        bot_info = response.json()
-    except requests.exceptions.RequestException as e:
-        bot_info = {"error": str(e)}
-
     return render_template("index.html", bot_info=bot_info)
 
-# Thread to run both Flask and bot
-def run_bot():
-    bot.run(os.environ["BOT_TOKEN"])
-
 if __name__ == "__main__":
-    thread = threading.Thread(target=run_bot)
-    thread.start()
-    
     app.run(debug=True)
