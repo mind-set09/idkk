@@ -13,22 +13,16 @@
   
   <main>
     <section class="server-list">
-      <h2>Server Information</h2>
-      <p>Number of Servers: <span id="server-count"></span></p>
-      <p>Total Users: <span id="total-users"></span></p>
+      <span id="server-count"></span>
+      <span id="total-users"></span>
     </section>
     
     <section class="command-usage">
-      <!-- Command Usage Statistics will go here -->
-    </section>
-    
-    <section class="server-statistics">
-      <h2>Bot Statistics</h2>
-      <p>Ping: <span id="ping"></span></p>
-      <p>CPU Usage: <span id="cpu-usage"></span></p>
-      <p>Memory Usage: <span id="memory-usage"></span></p>
-      <p>Operating System: <span id="os-info"></span></p>
-      <p>Python Version: <span id="python-version"></span></p>
+      <span id="ping"></span>
+      <span id="cpu-usage"></span>
+      <span id="memory-usage"></span>
+      <span id="os-info"></span>
+      <span id="python-version"></span>
     </section>
   </main>
   
@@ -36,12 +30,9 @@
     <p>&copy; 2023 Your Bot Name. All rights reserved.</p>
   </footer>
 
-  <!-- Add a terminal to display errors -->
   <div class="terminal">
     <pre id="terminal-output"></pre>
   </div>
-
-  <button id="refresh-btn">Refresh Bot Info</button>
 
   <script src="script.js"></script>
 </body>
