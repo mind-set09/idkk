@@ -40,10 +40,6 @@ async def botinfo(inter):
     network_info = psutil.net_io_counters()
     embed.add_field(name="Network Info 🌐", value=f"Sent: {network_info.bytes_sent} B\nReceived: {network_info.bytes_recv} B")
 
-    boot_time = psutil.boot_time()
-    boot_time_str = datetime.datetime.fromtimestamp(boot_time).strftime('%Y-%m-%d %H:%M:%S')
-    embed.add_field(name="Boot Time 🕒", value=boot_time_str)
-
     # Add more bot info fields here
 
     invite_button = disnake.ui.Button(
