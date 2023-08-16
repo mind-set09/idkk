@@ -1,8 +1,17 @@
 import disnake
-import psutil
-import platform
 from disnake.ext import commands
-import datetime
+
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
+
+import asyncio
+
+from database import db # SQLAlchemy database instance
+from sqlalchemy import create_engine
+
+engine = create_engine('sqlite:///database.db') # or other DB connection string
+
+db = SQLAlchemy(engine)
 import os
 
 # Database models
