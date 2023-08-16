@@ -64,12 +64,13 @@ class CreateTicketView(disnake.ui.View):
         await inter.response.send_message("Ticket details captured.", ephemeral=True)
         await inter.message.edit(view=modal)
 
+# Ticket creation modal
 class CreateTicketModal(disnake.ui.Modal):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    title = disnake.ui.TextInput(label="Title", custom_id="title_input")  # Add custom_id parameter
-    description = disnake.ui.TextInput(label="Description", custom_id="desc_input")  # Add custom_id parameter
+    title = disnake.ui.TextInput(label="Title", custom_id="title_input")
+    description = disnake.ui.TextInput(label="Description", custom_id="desc_input")
 
     async def callback(self, inter):
         title = self.title.value
@@ -82,7 +83,8 @@ class CreateTicketModal(disnake.ui.Modal):
         session.close()
 
         await inter.send("Ticket created!")
-        
+
+
 # Command: List Tickets
 @bot.command()
 async def tickets(ctx):
@@ -151,6 +153,33 @@ async def add_comment(inter, ticket_id: int, content: str):
 
     await inter.response.send_message("Comment added.")
 
+# Command: /ticketset
+@bot.slash_command()
+async def ticketset(inter):
+    # Create an embed with a "Create Ticket" button
+    embed = disnake.Embed(
+        title="Create a New Ticket",
+        description="Click the button below to create a new ticket.",
+        color=0x7289DA
+    )
+    
+    create_button = disnake.ui.Button(
+        label="Create Ticket",
+        style=disnake.ButtonStyle.primary,
+        custom_id="create_ticket_button"
+    )
+    
+    view = disnake.ui.View(create_button)
+    
+    await inter.response.send_message(embed=embed, view=view, ephemeral=True)
+
+# Button callback to open the ticket creation modal
+@bot.component("create_ticket_button")
+async def create_ticket_button_callback(inter):
+    modal = CreateTicketModal()
+    await inter.response.send_message("Creating a ticket...", ephemeral=True)
+    await inter.message.edit(view=modal)
+    
 # Slash Command: Bot Information
 @bot.slash_command()
 async def botinfo(inter):
