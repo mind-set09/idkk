@@ -1,4 +1,4 @@
-hikari==2.0.0.dev151
+hikari==2.0.0.dev99
 lightbulb==0.3.0
 SQLAlchemy==1.4.41
 python-dotenv==0.21.0
