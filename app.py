@@ -1,3 +1,4 @@
+from discord import Interaction
 from discord import Interaction, ButtonStyle
 from discord.ext import commands, tasks
 from discord_interactions import InteractionClient, Button, SelectMenu
