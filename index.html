@@ -1,58 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Viken Bot</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+        .card h2 {
+            margin: 0 0 10px;
+        }
+    </style>
 </head>
 <body>
-
-  <header>
-    <div class="navbar">
-      <div class="logo">
-        <img src="botlogo.png" alt="Viken Bot">
-      </div>
-      <nav>
-        <a href="#features">Features</a>
-        <a href="#commands">Commands</a>
-        <a href="#invite">Invite</a>
-      </nav>
+    <div class="container">
+        <div class="card">
+            <h2>Bot Information</h2>
+            <p><strong>Ping:</strong> {{ bot_info.ping }} ms</p>
+            <p><strong>CPU Usage:</strong> {{ bot_info.cpu_usage }}%</p>
+            <p><strong>Memory Usage:</strong> {{ bot_info.memory_usage }}%</p>
+            <p><strong>Operating System:</strong> {{ bot_info.os_info }}</p>
+            <p><strong>Python Version:</strong> {{ bot_info.python_version }}</p>
+            <p><strong>Invite the Bot:</strong> <a href="{{ bot_info.invite_url }}">Click here</a></p>
+        </div>
     </div>
-  </header>
-
-  <section id="hero">
-    <div class="content">
-      <h1>Enhance Your Discord Server</h1>
-      <p>Introducing the custom Discord bot built just for you.</p>
-      <a href="#" class="btn">Add to Server</a>
-    </div>
-    <img src="hero.svg" alt="Hero Image">
-  </section>
-
-  <section id="features">
-    <h2>Core Features</h2>
-    <div class="feature">
-      <h3>Music</h3>
-      <p>Rock out together with high quality music playback.</p>
-      <h3>Moderation</h3>
-      <p>Keep your community safe with auto moderation.</p>
-    </div>
-    <div class="feature">
-      <h3>Fun Commands</h3>
-      <p>Entertain your members with fun chat commands.</p>
-      <h3>Logging</h3>  
-      <p>Keep logs of activity with detailed logging tools.</p>
-    </div>
-  </section>
-  
-  <section id="invite">
-    <h2>Ready to Get Started?</h2>
-    <p>Invite Viken Bot to your server today!</p>
-    <a class="btn" href="#">Invite Bot</a>
-  </section>
-
-  <footer>
-    <p>&copy; Viken Bot 2023</p>
-  </footer>
-
 </body>
 </html>
