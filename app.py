@@ -4,7 +4,14 @@ import platform
 from disnake.ext import commands
 import datetime
 import os
+from flask import Flask, render_template
+import threading
+import requests
 
+# Flask app setup
+app = Flask(__name__)
+
+# Bot setup
 bot = commands.Bot(command_prefix="/")
 
 @bot.slash_command()
@@ -32,6 +39,15 @@ async def botinfo(inter):
     python_version = platform.python_version()
     embed.add_field(name="Python Version 🐍", value=python_version)
 
+    # Additional Information
+    disk_usage = psutil.disk_usage("/")
+    embed.add_field(name="Disk Usage 💾", value=f"{disk_usage.percent}%")
+
+    boot_time = datetime.datetime.fromtimestamp(psutil.boot_time()).strftime("%Y-%m-%d %H:%M:%S")
+    embed.add_field(name="Boot Time ⏰", value=boot_time)
+
+    # Add more fields as needed
+
     invite_button = disnake.ui.Button(
         label="Invite Bot 🤖",
         emoji="🤖",
@@ -44,5 +60,24 @@ async def botinfo(inter):
 
     await inter.response.send_message(embed=embed, view=view)
 
-if __name__ == "__main__":
+
+# Flask route
+@app.route("/")
+def index():
+    try:
+        response = requests.get("http://localhost:5000/botinfo")
+        bot_info = response.json()
+    except requests.exceptions.RequestException as e:
+        bot_info = {"error": str(e)}
+
+    return render_template("index.html", bot_info=bot_info)
+
+# Thread to run both Flask and bot
+def run_bot():
     bot.run(os.environ["BOT_TOKEN"])
+
+if __name__ == "__main__":
+    thread = threading.Thread(target=run_bot)
+    thread.start()
+    
+    app.run(debug=True)
