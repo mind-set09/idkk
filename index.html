@@ -2,81 +2,97 @@
 <html>
 
 <head>
-  <title>Viken Tech Bot Official</title>
-  <meta name="description" content="An awesome custom Discord bot with a variety of commands and a dashboard.">
+  <title>Viken Tech Bot</title>
+  
+  <meta name="description" content="Discord bot for Viken's Tech Server">
+  
   <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
 
   <header>
-    <div class="logo">
-      <a href="/">
-        <img src="botlogo.png" alt="Viken Tech Bot Official">
-      </a>
+    <div class="container">
+      <img src="logo.png" class="logo">
+
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#commands">Commands</a>
+        <a href="#invite">Invite</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#about">About</a>  
+      </nav>
     </div>
-    <nav>
-      <a href="#features">Features</a>
-      <a href="#commands">Commands</a>
-      <a href="#invite">Invite</a>
-      <a href="#dashboard">Dashboard</a>
-      <a href="#about">About</a>
-    </nav>
   </header>
 
   <section id="hero">
-    <h1>Your Ultimate Bot for Viken's Tech Server</h1>
-    <p>Enhance your Discord server with powerful features and easy management.</p>
-    <a href="https://discord.com/api/oauth2/authorize?client_id=1141182471409504306&permissions=8&scope=bot" class="btn">Add to Server</a>
+    <div class="container">
+      <h1>Enhance Your Discord Server</h1>
+
+      <p>Powerful moderation, useful commands, and customization for your server!</p>
+
+      <a href="#" class="btn">Add to Server</a>
+    </div>
   </section>
 
   <section id="features">
-    <h2>Awesome Features</h2>
+    <div class="container">
 
-    <div class="feature">
-      <h3>Advanced Commands</h3>
-      <p>Run commands like /ticket, /adminupload, /giveaway, and more.</p>
-    </div>
+      <h2>Key Features</h2>
 
-    <div class="feature">
-      <h3>Intuitive Dashboard</h3>
-      <p>Manage your server effortlessly with our user-friendly dashboard.</p>
-    </div>
-  </section>
+      <div class="feature">
+        <img src="moderation.png">
+        <h3>Moderation</h3>
+        <p>Keep your server safe and spam-free.</p>
+      </div>
 
-  <section id="commands">
-    <h2>Commands</h2>
-    <div class="commands-container">
-      <a href="https://discord.gg/WsGgGUyfTV" class="command">Invite to Tech Server</a>
-      <a href="https://discord.gg/53AHkZvT5A" class="command">Invite to Community Server</a>
+      <div class="feature">
+        <img src="music.png">
+        <h3>Music</h3>
+        <p>Listen together with high quality audio.</p>  
+      </div>
+
+      <div class="feature">
+        <img src="commands.png">
+        <h3>Custom Commands</h3>
+        <p>Automate responses with custom commands.</p>
+      </div>
+
     </div>
-    <p>Explore more commands on our dashboard.</p>
   </section>
 
   <section id="invite">
-    <h2>Add to Your Discord</h2>
-    <a href="https://discord.com/api/oauth2/authorize?client_id=1141182471409504306&permissions=8&scope=bot" class="btn invite">
-      Invite Bot
-    </a>
+    <div class="container">
+      <h2>Add to Your Server</h2>
+
+      <a class="btn" href="#">Invite Bot</a>
+    </div>
   </section>
 
   <section id="dashboard">
-    <h2>Dashboard</h2>
-    <p>Simplify server management with our powerful dashboard.</p>
-    <a href="dashboard.html" class="btn">Access Dashboard</a>
+    <div class="container">
+      <img src="dashboard.png" class="dashboard-img">
+
+      <h2>Web Dashboard</h2>
+
+      <p>Manage server settings, view data, and more through the dashboard.</p>
+
+      <a class="btn" href="#">Open Dashboard</a>
+    </div>
   </section>
 
   <section id="about">
-    <h2>About Viken Tech Bot Official</h2>
-    <p>Enhance your server with functionality and fun through Viken Tech Bot Official.</p>
-    <p>Built using Discord.js and Node.js. Source code available on GitHub.</p>
+    <div class="container">
+      <h2>About the Bot</h2>
+
+      <p>Custom built with Discord.js for Viken's Tech Server...</p>
+    </div>
   </section>
 
   <footer>
-    <p>&copy; Viken Tech Bot Official 2023</p>
-    <p>Created by John Doe</p>
+    <p>&copy; Viken Tech Bot 2023</p>
   </footer>
 
 </body>
-
 </html>
