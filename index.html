@@ -12,27 +12,26 @@
   </header>
   
   <main>
-    <section class="server-list">
-      <span id="server-count"></span>
-      <span id="total-users"></span>
+    <section class="bot-info">
+      <h2>Bot Information</h2>
+      <ul>
+        <li><strong>Ping:</strong> <span id="ping"></span> ms</li>
+        <li><strong>CPU Usage:</strong> <span id="cpu-usage"></span>%</li>
+        <li><strong>Memory Usage:</strong> <span id="memory-usage"></span>%</li>
+        <li><strong>Operating System:</strong> <span id="os-info"></span></li>
+        <li><strong>Python Version:</strong> <span id="python-version"></span></li>
+      </ul>
     </section>
     
-    <section class="command-usage">
-      <span id="ping"></span>
-      <span id="cpu-usage"></span>
-      <span id="memory-usage"></span>
-      <span id="os-info"></span>
-      <span id="python-version"></span>
+    <section class="terminal">
+      <h2>Terminal</h2>
+      <pre id="terminal-output"></pre>
     </section>
   </main>
   
   <footer>
     <p>&copy; 2023 Your Bot Name. All rights reserved.</p>
   </footer>
-
-  <div class="terminal">
-    <pre id="terminal-output"></pre>
-  </div>
 
   <script src="script.js"></script>
 </body>
