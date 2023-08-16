@@ -1,10 +1,10 @@
 import disnake
-from disnake import InteractionBot, SelectMenu, SelectOption, Button
 from disnake.ext import commands, tasks
+from disnake import ApplicationCommandInteraction, SelectMenu, SelectOption, Button
 import os
 
 intents = disnake.Intents.all()
-bot = InteractionBot(intents=intents)
+bot = commands.Bot(intents=intents)
 
 class TicketStatus(disnake.Enum):
     OPEN = 'Open'
