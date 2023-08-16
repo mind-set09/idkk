@@ -1,5 +1,4 @@
 hikari==2.0.0.dev120
-git+https://github.com/blurpy/lightbulb.git@1.2.0b3
 SQLAlchemy==1.4.41
 python-dotenv==0.21.0
 
