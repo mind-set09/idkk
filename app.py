@@ -1,222 +1,78 @@
-import os
-import disnake
-from disnake.ext import commands
+# Imports
+import hikari
+import lightbulb
+import miru
+
 import sqlalchemy
-from sqlalchemy import create_engine, Column, Integer, String, Text, ForeignKey
-from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
-import psutil
-import platform
 
 # Bot setup
-intents = disnake.Intents.default()
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = lightbulb.BotApp(token=TOKEN)
+bot.load_extensions_from("./extensions")
 
-# Database setup
-DATABASE_URL = "sqlite:///bot_database.db"
-engine = create_engine(DATABASE_URL)
-Session = sessionmaker(bind=engine)
+# Load bot token from environment variable
+bot_token = os.environ["BOT_TOKEN"]
+
+# Database 
 Base = declarative_base()
 
-# Ticket class
 class Ticket(Base):
-    __tablename__ = "tickets"
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String)
-    description = Column(Text)
-    author_id = Column(Integer)
-    status = Column(String, default="Open")
-
-    comments = relationship("TicketComment", back_populates="ticket")
-
-class TicketComment(Base):
-    __tablename__ = "ticket_comments"
-    id = Column(Integer, primary_key=True, index=True)
-    ticket_id = Column(Integer, ForeignKey("tickets.id"))
-    author_id = Column(Integer)
-    content = Column(Text)
-    
-    ticket = relationship("Ticket", back_populates="comments")
-
-Base.metadata.create_all(bind=engine)
-
-# Command: New Ticket
-@bot.command()
-async def new(ctx):
-    await ctx.send("Create a ticket!", view=create_view)
-
-# In-memory storage for active views
-active_views = {}
-
-# Persistent create ticket view
-class CreateTicketView(disnake.ui.View):
-    def __init__(self):
-        super().__init__()
-        self.ticket_title = None
-        self.ticket_description = None
-
-    @disnake.ui.button(label="Create Ticket", custom_id="create_button")
-    async def create(self, button, inter):
-        self.ticket_title = self.ticket_title or "No title"
-        self.ticket_description = self.ticket_description or "No description"
-
-        modal = CreateTicketModal(title=self.ticket_title, description=self.ticket_description)
-        await inter.response.send_message("Ticket details captured.", ephemeral=True)
-        await inter.message.edit(view=modal)
-
-# Ticket creation modal
-class CreateTicketModal(disnake.ui.Modal):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
-    title = disnake.ui.TextInput(label="Title", custom_id="title_input")
-    description = disnake.ui.TextInput(label="Description", custom_id="desc_input")
-
-    async def callback(self, inter):
-        title = self.title.value
-        desc = self.description.value
-
-        ticket = Ticket(title=title, description=desc, author_id=inter.author.id)
-        session = Session()
-        session.add(ticket)
-        session.commit()
-        session.close()
-
-        await inter.send("Ticket created!")
-
-
-# Command: List Tickets
-@bot.command()
+  __tablename__ = 'tickets'
+  
+  id = Column(Integer, primary_key=True)
+  title = Column(String)
+  status = Column(String)
+  
+# Persistent view for ticket creation  
+@bot.command
+@lightbulb.command('tickets', 'Ticket system commands')
+@lightbulb.implements(lightbulb.SlashCommandGroup)
 async def tickets(ctx):
-    session = Session()
-    all_tickets = session.query(Ticket).all()
-    session.close()
 
-    if not all_tickets:
-        await ctx.send("No tickets found.")
-        return
+  persistent_view = miru.View()
+  persistent_view.add_item(
+    miru.Button(label="Create Ticket", custom_id="create_ticket")
+  )
+  await ctx.respond(views=persistent_view)
+  
+# Modal for ticket creation  
+@bot.component()
+async def create_ticket_modal(ctx):
 
-    ticket_list = "\n".join([f"{ticket.id}: {ticket.title} - {ticket.status}" for ticket in all_tickets])
-    await ctx.send(f"Tickets:\n{ticket_list}")
+  modal = miru.Modal("Create Ticket")
+  
+  title_input = miru.TextInput(label="Title")
+  desc_input = miru.TextInput(label="Description")
+  
+  modal.add_input(title_input)
+  modal.add_input(desc_input)
+  
+  await ctx.respond(modal=modal)
+  
+# Ticket created embed   
+@bot.component()  
+async def ticket_created(ctx):
 
-# Slash Command: View Ticket Details
-@bot.slash_command()
-async def ticket(inter, ticket_id: int):
-    session = Session()
-    ticket = session.query(Ticket).get(ticket_id)
+  embed = hikari.Embed(title=TITLE, description=DESC)
+  
+  await ctx.edit_response(embed=embed)
+  
+# Approval buttons 
+approve_button = miru.Button(label="Approve")
+deny_button = miru.Button(label="Deny")
 
-    if not ticket:
-        await inter.response.send_message("Ticket not found.")
-        return
+await ctx.edit_response(components=[approve_button, deny_button])
 
-    comments = "\n".join([f"{comment.author_id}: {comment.content}" for comment in ticket.comments])
-    embed = disnake.Embed(
-        title=f"Ticket #{ticket.id}: {ticket.title}",
-        description=ticket.description,
-        color=0x7289DA
-    )
-    embed.add_field(name="Status", value=ticket.status)
-    embed.add_field(name="Comments", value=comments or "No comments")
+# Logging
+import logging
 
-    await inter.response.send_message(embed=embed)
+logger = logging.getLogger('bot')
+logger.setLevel(logging.INFO)
 
-# Slash Command: Close Ticket
-@bot.slash_command()
-async def close_ticket(inter, ticket_id: int):
-    session = Session()
-    ticket = session.query(Ticket).get(ticket_id)
+file_handler = logging.FileHandler('bot.log')
+logger.addHandler(file_handler) 
 
-    if not ticket:
-        await inter.response.send_message("Ticket not found.")
-        return
+logger.info("Bot started")
 
-    ticket.status = "Closed"
-    session.commit()
-    session.close()
-
-    await inter.response.send_message(f"Ticket #{ticket.id} has been closed.")
-
-# Slash Command: Add Comment
-@bot.slash_command()
-async def add_comment(inter, ticket_id: int, content: str):
-    session = Session()
-    ticket = session.query(Ticket).get(ticket_id)
-
-    if not ticket:
-        await inter.response.send_message("Ticket not found.")
-        return
-
-    comment = TicketComment(ticket_id=ticket_id, author_id=inter.author.id, content=content)
-    session.add(comment)
-    session.commit()
-    session.close()
-
-    await inter.response.send_message("Comment added.")
-
-# Command: /ticketset
-@bot.slash_command()
-async def ticketset(inter):
-    # Create an embed with a "Create Ticket" button
-    embed = disnake.Embed(
-        title="Create a New Ticket",
-        description="Click the button below to create a new ticket.",
-        color=0x7289DA
-    )
-    
-    create_button = disnake.ui.Button(
-        label="Create Ticket",
-        style=disnake.ButtonStyle.primary,
-        custom_id="create_ticket_button"
-    )
-    
-    view = disnake.ui.View(create_button)
-    
-    await inter.response.send_message(embed=embed, view=view, ephemeral=True)
-
-# Button callback to open the ticket creation modal
-@bot.component("create_ticket_button")
-async def create_ticket_button_callback(inter):
-    modal = CreateTicketModal()
-    await inter.response.send_message("Creating a ticket...", ephemeral=True)
-    await inter.message.edit(view=modal)
-    
-# Slash Command: Bot Information
-@bot.slash_command()
-async def botinfo(inter):
-    embed = disnake.Embed(
-        title="Bot Information 🤖",
-        description="Here's some detailed information about the bot!",
-        color=0x7289DA
-    )
-
-    embed.set_thumbnail(url=bot.user.avatar.url)
-
-    ping = round(bot.latency * 1000, 2)
-    embed.add_field(name="Ping 📶", value=f"{ping} ms")
-
-    cpu_usage = psutil.cpu_percent()
-    embed.add_field(name="CPU Usage 💻", value=f"{cpu_usage}%")
-
-    memory_info = psutil.virtual_memory()
-    embed.add_field(name="Memory Usage 🧠", value=f"{memory_info.percent}%")
-
-    os_info = f"{platform.system()} {platform.release()}"
-    embed.add_field(name="Operating System 🖥️", value=os_info)
-
-    python_version = platform.python_version()
-    embed.add_field(name="Python Version 🐍", value=python_version)
-
-    # Adding more bot-specific info
-    guild_count = len(bot.guilds)
-    member_count = sum(len(guild.members) for guild in bot.guilds)
-    command_count = len(bot.commands)
-
-    embed.add_field(name="Guilds Count 👥", value=guild_count)
-    embed.add_field(name="Members Count 👤", value=member_count)
-    embed.add_field(name="Commands Count ⚙️", value=command_count)
-
-    await inter.response.send_message(embed=embed)
-
-# Bot start
-if __name__ == "__main__":
-    bot.run(os.environ["BOT_TOKEN"])
+bot.run()
