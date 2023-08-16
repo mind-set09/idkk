@@ -6,6 +6,8 @@ from disnake.ext import commands, tasks
 import sqlite3
 
 
+bot = commands.Bot() 
+
 @bot.slash_command()
 async def system(ctx):
 
