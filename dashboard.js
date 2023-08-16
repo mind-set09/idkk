@@ -2,18 +2,30 @@ document.addEventListener("DOMContentLoaded", function () {
   updateLiveInfo();
 });
 
-function updateLiveInfo() {
-  // Simulate retrieving live information
-  const cpuUsage = "23.67%";
-  const memoryUsage = "379.98 MB";
-  const networkActivity = "3.7Mbps";
-  const pythonVersion = "3.10.12";
-  const platform = "Linux 5.10.0-24-amd64";
+async function updateLiveInfo() {
+  try {
+    const webhookUrl = 'YOUR_WEBHOOK_URL'; // Replace with your actual webhook URL
 
-  // Update the live information on the dashboard
-  document.getElementById("cpu-usage").textContent = cpuUsage;
-  document.getElementById("memory-usage").textContent = memoryUsage;
-  document.getElementById("network-activity").textContent = networkActivity;
-  document.getElementById("python-version").textContent = pythonVersion;
-  document.getElementById("platform").textContent = platform;
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        cpuUsage: '20%',
+        memoryUsage: '300 MB',
+        networkActivity: '1.5 Mbps',
+        pythonVersion: '3.9.7',
+        platform: 'Linux',
+      }),
+    });
+
+    if (response.ok) {
+      console.log('Webhook data sent successfully');
+    } else {
+      console.error('Failed to send webhook data');
+    }
+  } catch (error) {
+    console.error('Error sending webhook data:', error);
+  }
 }
