@@ -4,28 +4,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function updateLiveInfo() {
   try {
-    const webhookUrl = 'YOUR_WEBHOOK_URL'; // Replace with your actual webhook URL
-
-    const response = await fetch(webhookUrl, {
-      method: 'POST',
+    const response = await fetch("/get_live_info", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        cpuUsage: '20%',
-        memoryUsage: '300 MB',
-        networkActivity: '1.5 Mbps',
-        pythonVersion: '3.9.7',
-        platform: 'Linux',
-      }),
     });
 
     if (response.ok) {
-      console.log('Webhook data sent successfully');
+      const liveInfo = await response.json();
+      updateLiveInfoOnPage(liveInfo);
     } else {
-      console.error('Failed to send webhook data');
+      console.error("Failed to fetch live info");
     }
   } catch (error) {
-    console.error('Error sending webhook data:', error);
+    console.error("Error fetching live info:", error);
   }
+}
+
+function updateLiveInfoOnPage(liveInfo) {
+  document.getElementById("cpu-usage").textContent = liveInfo.cpuUsage;
+  document.getElementById("memory-usage").textContent = liveInfo.memoryUsage;
+  document.getElementById("network-activity").textContent = liveInfo.networkActivity;
+  document.getElementById("python-version").textContent = liveInfo.pythonVersion;
+  document.getElementById("platform").textContent = liveInfo.platform;
 }
