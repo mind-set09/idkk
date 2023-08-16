@@ -6,103 +6,96 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol {
 
 /* Set global font and color styles */
 body {
-  background-color: #121212;
-  color: #ffffff;
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
-/* Header styles */
-.header {
-  background-color: #1f1f1f;
-  padding: 1rem 0;
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #6934f4, #be2edd);
+  color: white;
+  padding: 20px;
 }
 
-.header a {
-  color: #ffffff;
+.navbar a {
+  color: white;
   text-decoration: none;
-  font-weight: 600;
-  margin: 0 1rem;
+  margin: 0 15px;
+  font-weight: 500;
+}
+
+/* Section styles */
+section {
+  padding: 80px;
 }
 
 /* Hero section styles */
-.hero {
-  background-color: #282828;
-  padding: 3rem 0;
-  text-align: center;
+#hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
 }
 
-.hero h2 {
-  font-size: 2.5rem;
+#hero img {
+  width: 500px;
+  border-radius: 8px;
 }
 
 /* Feature card styles */
 .feature {
-  background-color: #1f1f1f;
-  border-radius: 10px;
-  padding: 2rem;
-  text-align: center;
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 40px;
 }
 
-.feature h5 {
-  font-size: 1.2rem;
-  color: #ff2670;
+.feature h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  font-size: 1rem;
+  color: #888;
 }
 
 /* Button styles */
 .btn {
-  background-color: #ff2670;
-  color: #ffffff;
+  background: linear-gradient(90deg, #be2edd, #6934f4);
+  color: white;
   border: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 5px;
-  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  text-decoration: none;
 }
 
 .btn:hover {
-  background-color: #ff5e5e;
-}
-
-/* Live info section styles */
-.live-info {
-  background-color: #282828;
-  padding: 2rem;
-  border-radius: 10px;
-  margin-top: 2rem;
-  text-align: center;
+  background: linear-gradient(90deg, #ff2670, #ff5e5e);
 }
 
 /* Footer styles */
 footer {
-  background-color: #1f1f1f;
-  padding: 1rem 0;
+  background: #222;
+  color: white;
+  padding: 20px;
   text-align: center;
 }
-
-footer p {
-  color: #ffffff;
-  margin: 0;
-}
-
-/* Rainbow animation for headers */
-@keyframes rainbow {
-  0% { color: #ff2670; }
-  20% { color: #ff5e5e; }
-  40% { color: #ff9d5e; }
-  60% { color: #fff75e; }
-  80% { color: #aaff5e; }
-  100% { color: #67ff5e; }
-}
-
-h1, h2, h3, h4, h5, h6 {
-  animation: rainbow 5s infinite;
-}
-
-/* Add other custom styles here */
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
   /* Adjust styles for smaller screens */
+  section {
+    padding: 40px;
+  }
+
+  #hero img {
+    width: 100%;
+  }
 }
