@@ -1,6 +1,6 @@
 import disnake
 from disnake.ext import commands, tasks
-from disnake import ActionRow, Button, ButtonStyle, Select, Option
+from disnake import ActionRow, Button, ButtonStyle
 from enum import Enum
 
 bot = commands.Bot(command_prefix='!')
@@ -19,6 +19,7 @@ class TicketPriority(Enum):
     LOW = 'Low'
     MEDIUM = 'Medium'
     HIGH = 'High'
+
 
 class Ticket:
     def __init__(self, author_id, category, priority):
