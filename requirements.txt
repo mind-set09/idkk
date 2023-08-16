@@ -16,3 +16,4 @@ coloredlogs
 pylint
 autoflake
 autopep8
+database
