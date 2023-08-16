@@ -64,13 +64,12 @@ class CreateTicketView(disnake.ui.View):
         await inter.response.send_message("Ticket details captured.", ephemeral=True)
         await inter.message.edit(view=modal)
 
-# Ticket creation modal
 class CreateTicketModal(disnake.ui.Modal):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    title = disnake.ui.TextInput(label="Title")
-    description = disnake.ui.TextInput(label="Description")
+    title = disnake.ui.TextInput(label="Title", custom_id="title_input")  # Add custom_id parameter
+    description = disnake.ui.TextInput(label="Description", custom_id="desc_input")  # Add custom_id parameter
 
     async def callback(self, inter):
         title = self.title.value
@@ -83,7 +82,7 @@ class CreateTicketModal(disnake.ui.Modal):
         session.close()
 
         await inter.send("Ticket created!")
-
+        
 # Command: List Tickets
 @bot.command()
 async def tickets(ctx):
