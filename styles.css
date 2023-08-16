@@ -1,17 +1,16 @@
-/* Reset default browser styles */
-body, h1, h2, h3, h4, h5, h6, p, ul, ol {
+/* Reset some default styling */
+body, h1, h2, h3, p {
   margin: 0;
   padding: 0;
 }
 
-/* Set global font and color styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #121212;
+  font-family: 'Poppins', sans-serif;
+  background-color: #111;
   color: white;
 }
 
-/* Navbar styles */
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -23,87 +22,137 @@ body {
 
 .navbar a {
   color: white;
-  text-decoration: none;
   margin: 0 15px;
+  text-decoration: none;
   font-weight: 500;
-  transition: opacity 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
 }
 
 .navbar a:hover {
-  opacity: 0.7;
+  color: #f2c94c;
 }
 
-/* Section styles */
-section {
-  padding: 80px;
-}
-
-/* Hero section styles */
+/* Hero Section */
 #hero {
   display: flex;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: space-between;
+  padding: 100px 0;
 }
 
 #hero img {
-  width: 500px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 600px;
+  border-radius: 10px;
 }
 
-/* Feature card styles */
+/* Features Section */
+#features {
+  padding: 80px 0;
+  background-color: #292929;
+  color: white;
+}
+
 .feature {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 40px;
 }
 
 .feature h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 24px;
   margin-bottom: 10px;
 }
 
 .feature p {
-  font-size: 1rem;
-  color: #888;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
-/* Button styles */
-.btn {
-  background: linear-gradient(90deg, #be2edd, #6934f4);
+/* Invite CTA Section */
+#invite {
+  padding: 100px 0;
+  background-color: #1f1f1f;
   color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  text-decoration: none;
-}
-
-.btn:hover {
-  background: linear-gradient(90deg, #ff2670, #ff5e5e);
-}
-
-/* Footer styles */
-footer {
-  background: #222;
-  color: white;
-  padding: 20px;
   text-align: center;
 }
 
-/* Media queries for responsiveness */
-@media (max-width: 768px) {
-  /* Adjust styles for smaller screens */
-  section {
-    padding: 40px;
-  }
-
-  #hero img {
-    width: 100%;
-  }
+#invite h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
 }
+
+#invite p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+/* Footer */
+footer {
+  background-color: #111;
+  color: white;
+  padding: 40px 0;
+  text-align: center;
+}
+
+footer p {
+  font-size: 18px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #f2c94c;
+  color: #111;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #e3b630;
+}
+
+/* Dashboard Section */
+#dashboard {
+  padding: 80px;
+  background-color: #1f1f1f;
+  color: white;
+}
+
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.live-info p {
+  margin: 5px;
+}
+
+.command {
+  background-color: #2c2c2c;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.command h4 {
+  margin: 0;
+}
+
+.command p {
+  margin: 5px 0;
+}
+
+/* ... Other CSS styles ... */
