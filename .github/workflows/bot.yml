@@ -23,9 +23,6 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
         pip install git+https://github.com/blurpy/lightbulb.git@1.2.0b3 --process-dependency-links
-        pip uninstall aiohttp
-        pip cache purge
-        pip install aiohttp --global-option='build_ext' --global-option='-I/path/to/python/includes'
         sudo apt install build-essential python3-dev
 
     - name: Run Bot
