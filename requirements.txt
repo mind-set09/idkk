@@ -1,15 +1,15 @@
-hikari
-lightbulb
-SQLAlchemy
-python-dotenv
+hikari==2.0.0.dev151
+lightbulb==0.3.0
+SQLAlchemy==1.4.41
+python-dotenv==0.21.0
 
-miru
+miru==1.0.0
 
-aiohttp
-aiosqlite
+aiohttp==3.8.1
+aiosqlite==0.17.0
 
-pylint
-autopep8
+pylint==2.15.0
+autopep8==2.0.1
 
-setuptools
-wheel
+setuptools==65.5.0
+wheel==0.37.1
