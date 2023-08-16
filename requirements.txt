@@ -1,6 +1,4 @@
 hikari==2.0.0.dev120
-git config --global user.name "mind-set09"
-git config --global user.email "gdnunuuwu@gmail.com"
 git credential-cache --erase
 git+https://github.com/blurpy/lightbulb.git@1.2.0b3
 SQLAlchemy==1.4.41
