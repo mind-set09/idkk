@@ -19,3 +19,20 @@ fetch('/bot_stats')
     document.getElementById('os-info').textContent = data.os_info;
     document.getElementById('python-version').textContent = data.python_version;
   });
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const response = await fetch("/botinfo");
+  const data = await response.json();
+
+  const pingElement = document.getElementById("ping");
+  const cpuUsageElement = document.getElementById("cpu-usage");
+  const memoryUsageElement = document.getElementById("memory-usage");
+  const osInfoElement = document.getElementById("os-info");
+  const pythonVersionElement = document.getElementById("python-version");
+
+  pingElement.textContent = data.ping + " ms";
+  cpuUsageElement.textContent = data.cpu_usage + "%";
+  memoryUsageElement.textContent = data.memory_usage + "%";
+  osInfoElement.textContent = data.os_info;
+  pythonVersionElement.textContent = data.python_version;
+});
