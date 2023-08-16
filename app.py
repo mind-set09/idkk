@@ -1,80 +1,118 @@
-from discord import Interaction
-from discord import Interaction, ButtonStyle
+import discord
 from discord.ext import commands, tasks
-from discord_interactions import InteractionClient, Button, SelectMenu
+from discord_components import *
 import os
 
-bot = commands.Bot(command_prefix="!")
+bot = commands.Bot(command_prefix='!')
 DiscordComponents(bot)
 
-active_tickets = {}
+class Ticket:
+    def __init__(self, author_id, category):
+        self.author_id = author_id
+        self.category = category
+        self.status = 'Open'
+        self.created_at = datetime.datetime.now()
+        self.comments = []
+
+    def to_embed(self):
+        embed = discord.Embed(title=f'Ticket #{len(tickets) + 1}', color=discord.Color.green())
+        embed.add_field(name='Status', value=self.status, inline=True)
+        embed.add_field(name='Category', value=self.category, inline=True)
+        embed.add_field(name='Created At', value=self.created_at.strftime('%Y-%m-%d %H:%M:%S'), inline=False)
+
+        if self.comments:
+            comment_str = '\n'.join([f'**{comment[0]}**: {comment[1]}' for comment in self.comments])
+            embed.add_field(name='Comments', value=comment_str, inline=False)
+
+        return embed
+
+    def update(self, **kwargs):
+        for key, value in kwargs.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
+
+tickets = []
+categories = {}
 
 @bot.event
 async def on_ready():
-    print(f'Logged in as {bot.user.name}')
+    global categories
+    categories = {'Bug Report': discord.Color.red(), 'Feature Request': discord.Color.blue()}
+
+@bot.slash_command()
+async def tickets(ctx):
+    embed = discord.Embed(title='Ticket List', description='List of open tickets:', color=discord.Color.green())
+    for i, ticket in enumerate(tickets):
+        if ticket.status == 'Open':
+            embed.add_field(name=f'Ticket #{i + 1}', value=f'Category: {ticket.category}\nStatus: {ticket.status}', inline=False)
+    await ctx.send(embed=embed)
+
+@bot.slash_command()
+async def create(ctx):
+    category_select = Select(
+        placeholder='Select a category',
+        options=[Option(label=category, value=category) for category in categories.keys()],
+        custom_id='category_select'
+    )
+    await ctx.send('Choose a category for your ticket:', components=[category_select])
+
+@bot.select_option()
+async def category_select(int, select):
+    author_id = int.author.id
+    category = select.values[0]
+
+    new_ticket = Ticket(author_id, category)
+    tickets.append(new_ticket)
+
+    embed = new_ticket.to_embed()
+    await int.edit_origin(embed=embed, components=[])
 
 @bot.command()
-async def create_ticket(ctx):
-    embed = discord.Embed(title="New Ticket", description="Click the button to create a new ticket.", color=discord.Color.blue())
-    ticket_button = Button(style=ButtonStyle.blue, label="Create Ticket", custom_id="create_ticket")
-    await ctx.send(embed=embed, components=[ticket_button])
+async def close(ctx, id: int):
+    if 1 <= id <= len(tickets):
+        ticket = tickets[id - 1]
+        ticket.update(status='Closed')
+        await ctx.send(f'Ticket #{id} has been closed.')
+    else:
+        await ctx.send('Invalid ticket ID.')
 
-@bot.event
-async def on_button_click(ctx):
-    if ctx.custom_id == "create_ticket":
-        ticket_number = len(active_tickets) + 1
-        active_tickets[ticket_number] = {
-            "author_id": ctx.author.id,
-            "status": "Open"
-        }
+@bot.command()
+async def comment(ctx, id: int, *, msg):
+    if 1 <= id <= len(tickets):
+        ticket = tickets[id - 1]
+        ticket.comments.append((ctx.author.display_name, msg))
+        await ctx.send(f'Comment added to ticket #{id}.')
+    else:
+        await ctx.send('Invalid ticket ID.')
 
-        embed = discord.Embed(title=f"Ticket #{ticket_number}", description="Your ticket has been created.", color=discord.Color.green())
-        embed.add_field(name="Status", value="Open", inline=True)
-        embed.add_field(name="Assigned to", value="Unassigned", inline=True)
-        embed.add_field(name="Description", value="No description provided.", inline=False)
-
-        close_button = Button(style=ButtonStyle.red, label="Close Ticket", custom_id=f"close_ticket_{ticket_number}")
-        assign_button = Button(style=ButtonStyle.grey, label="Assign to Me", custom_id=f"assign_ticket_{ticket_number}")
-
-        await ctx.send(embed=embed, components=[close_button, assign_button])
-
-@bot.event
-async def on_button_click(ctx):
-    if ctx.custom_id.startswith("close_ticket_"):
-        ticket_number = int(ctx.custom_id.split("_")[2])
-        ticket = active_tickets.get(ticket_number)
-
-        if ticket and ticket["author_id"] == ctx.author.id:
-            ticket["status"] = "Closed"
-            await ctx.edit_origin(embed=generate_ticket_embed(ticket_number))
-            await ctx.send("Ticket closed.")
+@bot.component()
+async def handle_button(int, btn):
+    if btn.custom_id.startswith('ticket_'):
+        ticket_id = int(btn.custom_id.split('_')[1])
+        ticket = tickets[ticket_id - 1]
+        
+        if ticket.status == 'Open':
+            ticket.update(status='In Progress')
         else:
-            await ctx.send("You don't have permission to close this ticket.")
+            ticket.update(status='Open')
+        
+        await btn.edit_origin(embed=ticket.to_embed())
 
-    elif ctx.custom_id.startswith("assign_ticket_"):
-        ticket_number = int(ctx.custom_id.split("_")[2])
-        ticket = active_tickets.get(ticket_number)
+@tasks.loop(hours=12)
+async def maintenance():
+    for ticket in tickets:
+        if ticket.status == 'In Progress':
+            time_elapsed = datetime.datetime.now() - ticket.created_at
+            if time_elapsed.days >= 1:
+                ticket.update(status='Open')
 
-        if ticket:
-            ticket["assigned_to"] = ctx.author.id
-            await ctx.edit_origin(embed=generate_ticket_embed(ticket_number))
-            await ctx.send("Ticket assigned to you.")
-        else:
-            await ctx.send("Ticket not found.")
-
-def generate_ticket_embed(ticket_number):
-    ticket = active_tickets.get(ticket_number)
-    if not ticket:
-        return None
-
-    embed = discord.Embed(title=f"Ticket #{ticket_number}", color=discord.Color.green())
-    embed.add_field(name="Status", value=ticket["status"], inline=True)
-    
-    assigned_to = bot.get_user(ticket.get("assigned_to", 0))
-    embed.add_field(name="Assigned to", value=assigned_to.name if assigned_to else "Unassigned", inline=True)
-
-    embed.add_field(name="Description", value="No description provided.", inline=False)
-    return embed
+@tasks.loop(minutes=30)
+async def notifications():
+    for ticket in tickets:
+        if ticket.status == 'In Progress':
+            assigned_user = None  # Get the assigned user for the ticket
+            if assigned_user and assigned_user.status == discord.Status.online:
+                await assigned_user.send(f'Reminder: You have an ongoing ticket: {ticket.category}')
 
 
 bot.run(os.environ['TOKEN'])
