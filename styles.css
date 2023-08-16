@@ -1,71 +1,108 @@
-/* Layout */
-
-body {
-  font-family: Arial, sans-serif;
+/* Reset default browser styles */
+body, h1, h2, h3, h4, h5, h6, p, ul, ol {
   margin: 0;
   padding: 0;
 }
 
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
+/* Set global font and color styles */
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
 }
 
-section {
-  padding: 60px 0;
+/* Header styles */
+.header {
+  background-color: #1f1f1f;
+  padding: 1rem 0;
 }
 
-/* Header */
-
-header {
-  background: #222;
-  color: #fff;
-}
-
-header nav {
-  display: flex;
-  justify-content: center;
-}
-
-header a {
-  color: #fff;
+.header a {
+  color: #ffffff;
   text-decoration: none;
-  margin: 0 10px;  
+  font-weight: 600;
+  margin: 0 1rem;
 }
 
-/* Buttons */
-
-.btn {
-  display: inline-block;
-  padding: 10px 30px;
-  background: #4169e1;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-/* Sections */
-
-#features .feature {
+/* Hero section styles */
+.hero {
+  background-color: #282828;
+  padding: 3rem 0;
   text-align: center;
 }
 
-#dashboard .dashboard-img {
-  width: 80%;
-  margin: 0 auto 20px;
-  display: block;
+.hero h2 {
+  font-size: 2.5rem;
 }
 
-/* Footer */
+/* Feature card styles */
+.feature {
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
 
+.feature h5 {
+  font-size: 1.2rem;
+  color: #ff2670;
+}
+
+/* Button styles */
+.btn {
+  background-color: #ff2670;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #ff5e5e;
+}
+
+/* Live info section styles */
+.live-info {
+  background-color: #282828;
+  padding: 2rem;
+  border-radius: 10px;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* Footer styles */
 footer {
-  background: #222;
-  color: #fff;
-  padding: 20px;
-  text-align: center; 
+  background-color: #1f1f1f;
+  padding: 1rem 0;
+  text-align: center;
 }
 
 footer p {
-  margin: 0;  
+  color: #ffffff;
+  margin: 0;
+}
+
+/* Rainbow animation for headers */
+@keyframes rainbow {
+  0% { color: #ff2670; }
+  20% { color: #ff5e5e; }
+  40% { color: #ff9d5e; }
+  60% { color: #fff75e; }
+  80% { color: #aaff5e; }
+  100% { color: #67ff5e; }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  animation: rainbow 5s infinite;
+}
+
+/* Add other custom styles here */
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  /* Adjust styles for smaller screens */
 }
