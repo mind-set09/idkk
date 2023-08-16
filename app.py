@@ -2,13 +2,12 @@ import os
 from datetime import datetime
 
 import disnake
-from disnake import SlashCommandGroup
 from disnake.ext import commands, tasks
 import sqlite3
 
 info_commands = SlashCommandGroup("info", "System information commands")
 
-@info_commands.command()
+@bot.slash_command()
 async def system(ctx):
 
   cpu = psutil.cpu_percent()
@@ -96,13 +95,13 @@ async def on_ready():
   db.create_tables()
   print("Bot ready")
 
-@ticket_commands.command()
+@bot.slash_command()
 async def create(ctx, description: str, due_date: Option(datetime, "Leave empty for none")):
   ticket = Ticket(len(db.get_tickets()) + 1, description, "open", due_date)
   await db.create_ticket(ticket)
   await ctx.respond(f"Ticket {ticket.id} created")
 
-@ticket_commands.command() 
+@bot.slash_command() 
 async def list(ctx):
   tickets = db.get_tickets()
   embed = disnake.Embed(title="Open Tickets")
