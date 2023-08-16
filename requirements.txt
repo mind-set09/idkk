@@ -6,17 +6,13 @@ psycopg2-binary
 discord.py
 asyncio
 
-# Database 
 sqlalchemy
 psycopg2-binary
 
-# Environment vars
 python-dotenv
 
-# Styling
 coloredlogs
 
-# Linting
 pylint
 autoflake
 autopep8
