@@ -48,7 +48,7 @@ invite_btn = disnake.ui.Button(
 
 view.add_item(invite_btn)
 
-  await ctx.respond(embed=embed, view=view)
+await ctx.respond(embed=embed, view=view)
 
 
 class Ticket:
