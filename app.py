@@ -5,7 +5,6 @@ import disnake
 from disnake.ext import commands, tasks
 import sqlite3
 
-info_commands = SlashCommandGroup("info", "System information commands")
 
 @bot.slash_command()
 async def system(ctx):
@@ -47,7 +46,6 @@ async def system(ctx):
 
   await ctx.respond(embed=embed, view=view)
 
-bot.tree.add_command(info_commands)
 
 class Ticket:
   def __init__(self, id, description, status, due_date=None):
@@ -88,7 +86,6 @@ class Database:
 bot = commands.Bot(command_prefix='!')
 db = Database()
 
-ticket_commands = SlashCommandGroup("ticket", "Ticket commands")
 
 @bot.event
 async def on_ready():
@@ -129,5 +126,4 @@ async def check_tickets():
 async def on_slash_command_error(ctx, error):
   await ctx.send(f"Error: {error}")
 
-bot.tree.add_command(ticket_commands)
 bot.run(os.getenv("TOKEN"))
