@@ -1,144 +1,71 @@
-/* Reset default styles */
-* {
+/* Layout */
+
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-/* Set dark background and text colors */
-body {
-  background-color: #1a1a1a;
-  color: #e0e0e0;
-  font-family: Arial, sans-serif;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-/* Header styles */
-header {
-  background-color: #262626;
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
   padding: 20px;
+}
+
+section {
+  padding: 60px 0;
+}
+
+/* Header */
+
+header {
+  background: #222;
+  color: #fff;
+}
+
+header nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
 }
 
-.logo img {
-  width: 50px;
-  height: 50px;
-}
-
-nav a {
-  color: #e0e0e0;
-  margin: 0 15px;
+header a {
+  color: #fff;
   text-decoration: none;
-  transition: color 0.3s;
+  margin: 0 10px;  
 }
 
-nav a:hover {
-  color: #ffffff;
-}
-
-/* Hero section styles */
-#hero {
-  background-color: #111;
-  padding: 100px 0;
-  text-align: center;
-}
+/* Buttons */
 
 .btn {
   display: inline-block;
-  padding: 10px 20px;
-  background-color: rgb(255, 100, 100);
+  padding: 10px 30px;
+  background: #4169e1;
   color: #fff;
-  border: none;
-  border-radius: 5px;
   text-decoration: none;
-  transition: background-color 0.3s;
-  cursor: pointer;
+  border-radius: 4px;
 }
 
-.btn:hover {
-  background-color: rgb(255, 0, 0);
-}
+/* Sections */
 
-/* Features section styles */
-#features {
-  background-color: #1a1a1a;
-  padding: 50px 0;
+#features .feature {
   text-align: center;
 }
 
-.feature {
-  margin-bottom: 40px;
+#dashboard .dashboard-img {
+  width: 80%;
+  margin: 0 auto 20px;
+  display: block;
 }
 
-.feature h3 {
-  color: rgb(100, 255, 100);
-  margin-top: 15px;
-  font-size: 24px;
-}
+/* Footer */
 
-.feature p {
-  color: #b0b0b0;
-}
-
-/* Commands section styles */
-#commands {
-  background-color: #111;
-  padding: 50px 0;
-  text-align: center;
-}
-
-.command {
-  background-color: rgb(100, 100, 255);
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  margin: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.command:hover {
-  background-color: rgb(0, 0, 255);
-}
-
-/* Invite section styles */
-#invite {
-  background-color: #262626;
-  padding: 100px 0;
-  text-align: center;
-}
-
-/* Dashboard section styles */
-#dashboard {
-  background-color: #1a1a1a;
-  padding: 100px 0;
-  text-align: center;
-}
-
-/* About section styles */
-#about {
-  background-color: #111;
-  padding: 50px 0;
-  text-align: center;
-}
-
-/* Footer styles */
 footer {
-  background-color: #262626;
-  color: #b0b0b0;
-  padding: 20px 0;
-  text-align: center;
+  background: #222;
+  color: #fff;
+  padding: 20px;
+  text-align: center; 
 }
 
-footer a {
-  color: rgb(100, 255, 100);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-footer a:hover {
-  color: rgb(0, 255, 0);
+footer p {
+  margin: 0;  
 }
