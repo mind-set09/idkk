@@ -1,3 +1,4 @@
 setuptools==65.5.0
 discord.py
 discord-py-interactions
+disnake
