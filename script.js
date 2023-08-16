@@ -9,16 +9,13 @@ fetch('/server_info')
     console.error('Error fetching server info:', error);
   });
 
-// Fetch bot stats from the Flask app
+// Fetch bot stats
 fetch('/bot_stats')
   .then(response => response.json())
   .then(data => {
-    document.getElementById('ping').textContent = `${data.ping} ms`;
-    document.getElementById('cpu-usage').textContent = `${data.cpuUsage}%`;
-    document.getElementById('memory-usage').textContent = `${data.memoryUsage}%`;
-    document.getElementById('os-info').textContent = data.osInfo;
-    document.getElementById('python-version').textContent = data.pythonVersion;
-  })
-  .catch(error => {
-    console.error('Error fetching bot stats:', error);
+    document.getElementById('ping').textContent = data.ping;
+    document.getElementById('cpu-usage').textContent = data.cpu_usage;
+    document.getElementById('memory-usage').textContent = data.memory_usage;
+    document.getElementById('os-info').textContent = data.os_info;
+    document.getElementById('python-version').textContent = data.python_version;
   });
