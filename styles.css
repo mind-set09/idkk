@@ -1,52 +1,64 @@
-/* Reset some default styles */
-body, h1, h2, h3, p {
-  margin: 0;
-  padding: 0;
-}
-
 body {
+  background-color: #121212;
+  color: #ffffff;
   font-family: Arial, sans-serif;
 }
 
-/* Header styles */
 header {
-  background-color: #7289DA;
-  color: white;
-  text-align: center;
+  background-color: #333;
   padding: 1rem;
+  text-align: center;
 }
 
-/* Main content styles */
 main {
-  display: flex;
-  justify-content: space-around;
   padding: 2rem;
 }
 
-/* Section styles */
-section {
-  border: 1px solid #ddd;
+.server-statistics {
+  background-color: #444;
   padding: 1rem;
-  margin: 1rem;
-  border-radius: 8px;
-  flex: 1;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
 }
 
-/* Footer styles */
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #f0f0f0;
-  border-top: 1px solid #ddd;
-}
-
-/* Terminal styles */
 .terminal {
-  margin-top: 2rem;
+  background-color: #222;
   padding: 1rem;
-  background-color: #333;
-  color: #fff;
-  border-radius: 8px;
-  white-space: pre-wrap;
-  font-family: monospace;
+  margin-top: 2rem;
+}
+
+#terminal-output {
+  color: #00ff00;
+}
+
+#refresh-btn {
+  background-color: #00ff00;
+  color: #000000;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+#refresh-btn:hover {
+  background-color: #000000;
+  color: #00ff00;
+}
+
+/* Add rainbow color animation */
+@keyframes rainbow {
+  0% { color: #ff0000; }
+  14% { color: #ff9900; }
+  28% { color: #ffff00; }
+  43% { color: #33ff00; }
+  57% { color: #0099ff; }
+  71% { color: #3300ff; }
+  85% { color: #9900ff; }
+  100% { color: #ff0099; }
+}
+
+/* Apply rainbow animation to specific elements */
+#ping, #cpu-usage, #memory-usage, #os-info, #python-version {
+  animation: rainbow 8s infinite;
 }
