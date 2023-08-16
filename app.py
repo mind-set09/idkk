@@ -1,21 +1,19 @@
 import disnake
 from disnake.ext import commands, tasks
-from disnake import ActionRow, Button, ButtonStyle
-from enum import Enum
+from disnake.ui import View, Button
 
 bot = commands.Bot(command_prefix='!')
-DisnakeComponents(bot)
 
-class TicketStatus(Enum):
+class TicketStatus(disnake.Enum):
     OPEN = 'Open'
     IN_PROGRESS = 'In Progress'
     CLOSED = 'Closed'
 
-class TicketCategory(Enum):
+class TicketCategory(disnake.Enum):
     BUG_REPORT = 'Bug Report'
     FEATURE_REQUEST = 'Feature Request'
 
-class TicketPriority(Enum):
+class TicketPriority(disnake.Enum):
     LOW = 'Low'
     MEDIUM = 'Medium'
     HIGH = 'High'
