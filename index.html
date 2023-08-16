@@ -21,7 +21,12 @@
     </section>
     
     <section class="server-statistics">
-      <!-- Server Statistics will go here -->
+      <h2>Bot Statistics</h2>
+      <p>Ping: <span id="ping"></span></p>
+      <p>CPU Usage: <span id="cpu-usage"></span></p>
+      <p>Memory Usage: <span id="memory-usage"></span></p>
+      <p>Operating System: <span id="os-info"></span></p>
+      <p>Python Version: <span id="python-version"></span></p>
     </section>
   </main>
   
@@ -33,6 +38,8 @@
   <div class="terminal">
     <pre id="terminal-output"></pre>
   </div>
+
+  <button id="refresh-btn">Refresh Bot Info</button>
 
   <script src="script.js"></script>
 </body>
