@@ -3,52 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bot Dashboard</title>
+    <title>Bot Information</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-        .container {
+            background-color: #f7f7f7;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
-        .card {
-            background-color: #fff;
+
+        .info-container {
+            background-color: #ffffff;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 400px;
-            width: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 24px;
             text-align: center;
+            width: 360px;
         }
-        .card h2 {
-            margin: 0 0 10px;
-            color: #333;
+
+        h1 {
+            color: #3498db;
+            margin-top: 0;
         }
-        p {
-            margin: 10px 0;
+
+        .info-box {
+            background-color: #f2f2f2;
+            border-radius: 4px;
+            padding: 12px;
+            margin: 12px 0;
         }
-        a {
-            color: #007bff;
-            text-decoration: none;
+
+        .button-container {
+            margin-top: 24px;
+        }
+
+        .invite-button {
+            background-color: #3498db;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            padding: 8px 16px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <h2>Bot Information</h2>
-            <p><strong>Ping:</strong> {{ bot_info.ping }} ms</p>
-            <p><strong>CPU Usage:</strong> {{ bot_info.cpu_usage }}%</p>
-            <p><strong>Memory Usage:</strong> {{ bot_info.memory_usage }}%</p>
-            <p><strong>Operating System:</strong> {{ bot_info.os_info }}</p>
-            <p><strong>Python Version:</strong> {{ bot_info.python_version }}</p>
-            <p><strong>Invite the Bot:</strong> <a href="{{ bot_info.invite_url }}">Click here</a></p>
+    <div class="info-container">
+        <h1>Bot Information</h1>
+        <div class="info-box">
+            <p>Ping: {{ bot_info.ping }} ms</p>
+            <p>CPU Usage: {{ bot_info.cpu_usage }}%</p>
+            <p>Memory Usage: {{ bot_info.memory_usage }}%</p>
+            <p>Operating System: {{ bot_info.os_info }}</p>
+            <p>Python Version: {{ bot_info.python_version }}</p>
+            <!-- Add more bot info fields here -->
+        </div>
+        <div class="button-container">
+            <a class="invite-button" href="{{ bot_info.invite_url }}" target="_blank">Invite Bot 🤖</a>
         </div>
     </div>
 </body>
