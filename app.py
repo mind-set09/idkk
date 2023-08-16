@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 
 import disnake
-from disnake import SlashCommandGroup, Option 
+from disnake import SlashCommandGroup
 from disnake.ext import commands, tasks
 import sqlite3
 
