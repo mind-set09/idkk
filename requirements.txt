@@ -1,9 +1,7 @@
-hikari==2.0.0.dev99
-lightbulb==0.3.0
+hikari==dev99
+lightbulb==1.2.0b3
 SQLAlchemy==1.4.41
 python-dotenv==0.21.0
-
-miru==1.0.0
 
 aiohttp==3.8.1
 aiosqlite==0.17.0
