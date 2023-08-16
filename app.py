@@ -1,6 +1,7 @@
 import discord
-from discord.ext import commands
-from discord_components import DiscordComponents, Button, ButtonStyle
+from discord import Interaction, ButtonStyle
+from discord.ext import commands, tasks
+from discord_interactions import InteractionClient, Button, SelectMenu
 import os
 
 bot = commands.Bot(command_prefix="!")
