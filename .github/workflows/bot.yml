@@ -22,7 +22,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
-        pip install git+https://github.com/blurpy/lightbulb.git@1.2.0b3 --process-dependency-links
+        pip install git+https://github.com/blurpy/lightbulb.git@1.2.0b3
         sudo apt install build-essential python3-dev
 
     - name: Run Bot
