@@ -39,7 +39,7 @@ support_btn = disnake.ui.Button(
     url="https://discord.gg/WsGgGUyfTV"
   )
 
-  view.add_item(support_btn)
+view.add_item(support_btn)
 
   invite_btn = disnake.ui.Button(
     label="Invite Bot",
