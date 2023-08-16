@@ -41,12 +41,12 @@ support_btn = disnake.ui.Button(
 
 view.add_item(support_btn)
 
-  invite_btn = disnake.ui.Button(
+invite_btn = disnake.ui.Button(
     label="Invite Bot",
     url=f"https://discord.com/oauth2/authorize?client_id={bot.user.id}&scope=applications.commands%20bot" 
   )
 
-  view.add_item(invite_btn)
+view.add_item(invite_btn)
 
   await ctx.respond(embed=embed, view=view)
 
