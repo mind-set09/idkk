@@ -71,4 +71,4 @@ def get_live_info():
 
 if __name__ == "__main__":
     bot.loop.create_task(get_live_info())
-    bot.run("YOUR_BOT_TOKEN")
+    bot.run("MTE0MTE4MjQ3MTQwOTUwNDMwNg.Gx68d-.SmdzQh2OC3fBmDaxb4fORptimR0hlrzjmtymZ8")
