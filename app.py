@@ -1,27 +1,25 @@
 import disnake
 from disnake.ext import commands
-
-from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
-
 import asyncio
-import os
 
-from database import db # SQLAlchemy database instance
-from sqlalchemy import create_engine
+from sqlalchemy import Column, Integer, String
+from database import Base, Session
 
 engine = create_engine('sqlite:///database.db') # or other DB connection string
 
 db = SQLAlchemy(engine)
 
 # Database models
-class Ticket(db.Model):
-  id = db.Column(db.Integer, primary_key=True)
-  title = db.Column(db.String)
-  description = db.Column(db.String)
-  author_id = db.Column(db.Integer)
-  status = db.Column(db.String)
+class Ticket(Base):
+  __tablename__ = 'tickets'
 
+  id = Column(Integer, primary_key=True)
+  title = Column(String)
+  description = Column(String)
+  author_id = Column(Integer)
+  status = Column(String)
+
+Base.metadata.create_all(engine) 
 class Comment(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   ticket_id = db.Column(db.Integer, db.ForeignKey('ticket.id'))
