@@ -7,6 +7,8 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol {
 /* Set global font and color styles */
 body {
   font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: white;
 }
 
 /* Navbar styles */
@@ -24,6 +26,11 @@ body {
   text-decoration: none;
   margin: 0 15px;
   font-weight: 500;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+  opacity: 0.7;
 }
 
 /* Section styles */
@@ -41,6 +48,7 @@ section {
 #hero img {
   width: 500px;
   border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Feature card styles */
